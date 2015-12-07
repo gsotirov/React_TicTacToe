@@ -1,0 +1,32 @@
+{
+  "name": "TicTacToeGame",
+  "version": "1.0.0",
+  "description": "Tic Tac Toe Game",
+  "main": "app.js",
+  "scripts": {
+    "watch": "watchify js/app.js -o src/bundle.js -v",
+    "browserify": "browserify js/app.js | uglifyjs > src/bundle.js",
+    "build": "npm run browserify "
+  },
+  "author": "Cortez",
+  "license": "ISC",
+  "dependencies": {
+    "envify": "^3.4.0",
+    "events": "^1.1.0",
+    "flux": "^2.1.1",
+    "object-assign": "^4.0.1",
+    "react": "~0.11.2"
+  },
+  "devDependencies": {
+    "browserify": "~6.0.3",
+    "nodemon": "^1.2.1",
+    "reactify": "~0.14.0",
+    "uglify-js": "~2.4.15",
+    "watchify": "^3.1.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+}
