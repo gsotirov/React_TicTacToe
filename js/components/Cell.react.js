@@ -10,6 +10,7 @@ module.exports = React.createClass({
 
 		return (
 			<div 
+				key = {this.props.xCoord}
 				onClick={this.props.cellClick}
 				className="game-cell is-empty" 
 				data-x={this.props.xCoord} 

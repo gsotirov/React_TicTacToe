@@ -11,7 +11,7 @@ var ACTION_SETTINGS = require('../action-settings');
 var CHANGE_EVENT = 'change';
 
 var id = 0;
-var _players = [];
+var players = [];
 
 var PlayersStore = assign({}, EventEmitter.prototype, {
 
@@ -28,38 +28,35 @@ var PlayersStore = assign({}, EventEmitter.prototype, {
 	},
 
 	getActivePlayers: function () {
-		return _players.filter(function (player) {
+		return players.filter(function (player) {
 			return player.active === true;
 		});
 	},
 
 	getAll: function () {
-		return _players;
+		return players;
 	},
 
-	add: function (names) {
-		for(var i = 0; i < names.length; i++) {
-			_players.push({
-				id: ++id,
-				name: names[i],
-				score: 0,
-				active: true
-			});
-		}
+	add: function (player) {
+
+		player.id = ++id;
+		player.active = true;
+
+		players.push(player);
 	},
 
 	updateScore: function (name, newScore) {
 
-		for(var i = 0; i < _players.length; i++) {
-			if(_players[i].name === name) {
-				_players[i].score = newScore;
+		for (var i = 0; i < players.length; i++) {
+			if (players[i].name === name) {
+				players[i].score = newScore;
 			}
 		}
 
 	},
 
 	destroy: function (id) {
-		delete _players[id];
+		delete players[id];
 	}
 
 });
@@ -67,13 +64,20 @@ var PlayersStore = assign({}, EventEmitter.prototype, {
 TicTacDispatcher.register(function (payload) {
 
 	var action = payload.actionType;
-	var playerNames = '';
+	var players = [];
 
-	switch(action) {
+	switch (action) {
+
 		case ACTION_SETTINGS.add:
-			playerNames = payload.playerNames;
-			if(playerNames.length > 0) {
-				PlayersStore.add(playerNames);
+
+			players = payload.players;
+
+			if (players.length > 0) {
+
+				for (var i = 0; i < players.length; i++) {
+					PlayersStore.add(players[i]);
+				}
+				// Emit the change so the other components know about it and update accordingly.
 				PlayersStore.emitChange();
 			}
 			break;
@@ -83,12 +87,17 @@ TicTacDispatcher.register(function (payload) {
 			var name = payload.pName,
 				score = payload.score;
 
-			if(score && typeof score === 'number') {
+			if (score && typeof score === 'number') {
+
 				PlayersStore.updateScore(name, score);
+
+				// Emit the change so the other components know about it and update accordingly.
 				PlayersStore.emitChange();
 			}
 			break;
+
 		default: 
+			break;
 	}
 });
 

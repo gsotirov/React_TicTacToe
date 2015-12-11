@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "watchify js/app.js -o src/bundle.js -v",
     "browserify": "browserify js/app.js | uglifyjs > src/bundle.js",
-    "build": "npm run browserify "
+    "build": "npm run browserify"
   },
   "author": "Cortez",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "envify": "^3.4.0",
     "events": "^1.1.0",
     "flux": "^2.1.1",
+    "jslint": "^0.9.5",
     "object-assign": "^4.0.1",
     "react": "~0.11.2"
   },

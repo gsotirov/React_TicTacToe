@@ -13,7 +13,7 @@ module.exports = React.createClass({
 		var gameCells = [];
 
 		for(var i = 0; i < 3; i++) {
-			gameCells[i] = <Cell key={i} xCoord={ i } yCoord={ this.props.coord } cellClick={ this.props.cellClick }/>;
+			gameCells[i] = <Cell xCoord={ i } yCoord={ this.props.coord } cellClick={ this.props.cellClick }/>;
 		}
 
 		return (

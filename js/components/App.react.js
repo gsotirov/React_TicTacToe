@@ -15,7 +15,6 @@ var PlayPage = require('./PlayPage.react');
 function getAppState () {
 	return {
 		activePlayers: PlayersStore.getActivePlayers()
-		//allPlayers: PlayersStore.getAll()
 	};
 }
 
@@ -35,6 +34,7 @@ module.exports = React.createClass({
 	},
 
 	componentWillUnmount: function () {
+		// TODO: Set deactivator to the active Players...
 		this._store.removeChangeListener(this._onChangeEvent);
 	},
 
@@ -57,9 +57,20 @@ module.exports = React.createClass({
 
 			// Added 2s timeout for dramatic effect, otherwise the spinner won't be seen :)
 			setTimeout(function () {
-				Actions.addPlayers(playerNames);
+
+				Actions.addPlayers([
+					{
+						name: playerNames[0],
+						score: 0
+					},
+					{
+						name: playerNames[1],
+						score: 0
+					}
+				]);
 				loader.classList.remove('visible');
 				loader.classList.add('hidden');
+
 			}, 1000);
 		}
 	},

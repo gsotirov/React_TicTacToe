@@ -6,6 +6,7 @@ var React = require('react');
 var GameField = require('./GameField.react');
 var PlayersList = require('./PlayersList.react');
 var MessageBox = require('./MessageBox.react');
+var LeaderBoard = require('./LeaderBoard.react');
 
 var ACTION_SETTINGS = require('../action-settings');
 var Actions = require('../actions/TicTacAction');
@@ -194,6 +195,7 @@ module.exports = React.createClass({
 		
 		return (
 			<div id="play-page" className="clearfix">
+				<LeaderBoard />
 				<MessageBox result={this.state.result} messageClass={ this.state.messageClass } activePlayer={ this.state.players[this.state.nowPlaying].name }/>
 				<div className="col-md-6">
 					<GameField cellClick={ this._setMark }/>

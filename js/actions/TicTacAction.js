@@ -5,10 +5,10 @@ var ACTION_SETTINGS = require('../action-settings');
 
 module.exports = {
 
-	addPlayers: function (names) {
-		Dispatcher.dispatch({
-			actionType: 'PLAYERS_ADD',
-			playerNames: names
+	addPlayers: function (players) {
+	    Dispatcher.dispatch({
+			actionType: ACTION_SETTINGS.add,
+			players: players
 		});
 	},
 	updatePlayerScore: function (name, score) {
